@@ -1,2 +1,2 @@
 # lambdas
-The λ-calculus in Python
+Expressions from lambda and SKI combinator calculi, in Python

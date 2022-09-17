@@ -6,8 +6,8 @@
 IDENT = lambda λ: λ
 
 IF    = IDENT
-TRUE  = lambda true: lambda false: true
-FALSE = lambda true: lambda false: false
+TRUE  = lambda p: lambda q: p
+FALSE = lambda p: lambda q: q
 
 OR  = lambda a: lambda b: a(TRUE)(b)
 AND = lambda a: lambda b: a(b)(FALSE)
@@ -17,16 +17,21 @@ XOR  = lambda a: lambda b: a(NOT(b))(b)
 XNOR = lambda a: lambda b: NOT(XOR(a)(b))
 NAND = lambda a: lambda b: NOT(AND(a)(b))
 
+B = lambda f: lambda g: lambda h: f(g(h))
+C = lambda f: lambda g: lambda h: f(h)(g)
 I = IDENT
 K = TRUE
+S = lambda f: lambda g: lambda h: f(h)(g(h))
 U = lambda f: f(f)
-S = lambda a: lambda b: lambda c: a(c)(b(c))
+W = lambda f: lambda g: f(g)(g)
 Y = lambda f: (
     (lambda g: f(g(g)))
     (lambda g: f(g(g)))
 )
 Z = lambda f: (
-    (lambda g: f(g(g)))
+    (lambda g: f(
+        lambda a: g(g)(a)
+    ))
     (lambda g: f(
         lambda a: g(g)(a)
     ))
